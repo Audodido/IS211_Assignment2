@@ -2,19 +2,35 @@ import argparse
 import urllib.request
 import logging
 import datetime
-from pprint import pprint
+# from pprint import pprint
 
 def downloadData(url):
     """Downloads the data"""
     with urllib.request.urlopen(url) as response:
         data = response.read()
+        #print(data)
         return data
 
 # Write a function called ​processData​, which takes the contents of the file as the first parameter, processes 
 # the file line by line, and returns a dictionary that maps a person’s ID to a tuple of the form (name, birthday). 
 def processData(file_content):
-    pass
+    a_dict = {}           
+            
+    a_list = file_content.splitlines()
 
+#takes data from url, decodes it from utf to str, stores entries in a list separated by commas—then puts them into a dictionary
+    for a in a_list:
+        a = a.decode("utf-8")
+        b = a.split(",")
+        a_dict[b[0]] = (b[1], b[2])
+
+# GOTTA CONVERT THE BDAY IN THE TUPLE TO A  DATETIME OBJECT
+
+# return dictionary  
+    for key, value in a_dict.items():
+        print(key, ":", value)
+        
+        
 
 # def displayPerson(id, personData):
 #     pass
@@ -24,7 +40,7 @@ def processData(file_content):
 
 
 if __name__ == "__main__":
-    downloadData("https://s3.amazonaws.com/cuny-is211-spring2015/birthdays100.csv")
+    processData(downloadData("https://s3.amazonaws.com/cuny-is211-spring2015/birthdays100.csv"))
 
     # """Main entry point"""
     # parser = argparse.ArgumentParser()
@@ -34,12 +50,3 @@ if __name__ == "__main__":
 
 
 
-
-# do two things: write an output file 
-# recording which lines in the file ​cannot​ be processed correctly due to an improperly formatted date; and 
-# allow a user to enter in an ID number and print out that person’s information. 
-
-#use urllib for getting data from csv
-#use datetime for formatting b-days
-#use logging to record lines in the file ​cannot​ be processed correctly
-#use argparse to let somsone enter id number when program is excecuted from CLI
