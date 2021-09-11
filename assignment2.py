@@ -1,4 +1,3 @@
-##SECOND_APPROACH
 
 import argparse
 import urllib.request
