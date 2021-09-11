@@ -32,7 +32,10 @@ def processData(file_content):
             pass
             #print("bad format")
 
-
+####$#$%^$^$#%^&#$%^&Y%Y^%Y####$#$%^$^$#%^&#$%^&Y%Y^%Y&
+####$#$%^$^$#%^&#$%^&Y%Y^%Y&
+####$#$%^$^$#%^&#$%^&Y%Y^%Y&
+&
 
 # GOTTA CONVERT THE BDAY IN THE TUPLE TO A  DATETIME OBJECT
 
