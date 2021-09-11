@@ -1,3 +1,5 @@
+##SECOND_APPROACH
+
 import argparse
 import urllib.request
 import logging
@@ -12,50 +14,35 @@ def downloadData(url):
         return data
 
 
-# Write a function called ​processData​, which takes the contents of the file as the first parameter, processes 
-# the file line by line, and returns a dictionary that maps a person’s ID to a tuple of the form (name, birthday). 
 def processData(file_content):
+
+
     person_data = {}                
-    a_list = file_content.splitlines()
-#takes data from url, decodes it from utf to str, stores entries in a list separated by commas—then puts them into a dictionar
+    split_list = file_content.splitlines()
+    format = "%d/%m/%Y" 
 
-    for a in a_list:
-        a = a.decode("utf-8")
-        b = a.split(",")
+    for i in split_list:
+        a = i.decode("utf-8") #decodes each entry
+        b = a.split(",") # splits each entry into it's own list
+        # print(b)
         try:
-            # print(a)
-            format = "%m/%d/%Y" 
-            date_req_format = datetime.strptime(b[2], format).date()   
+            date_req_format = datetime.strptime(b[2], format).date() #formats datetime obj
             person_data[b[0]] = (b[1], date_req_format)
-            # print(b[0], b[1], date_req_format, b[2])
+            # print(b[0], b[1], date_req_format)
         except:
-            pass
-            #print("bad format")
+            # pass
+            print("bad format", b[0]) ##change to logging + error message
 
-####$#$%^$^$#%^&#$%^&Y%Y^%Y####$#$%^$^$#%^&#$%^&Y%Y^%Y&
-####$#$%^$^$#%^&#$%^&Y%Y^%Y&
-####$#$%^$^$#%^&#$%^&Y%Y^%Y&
-&
-
-# GOTTA CONVERT THE BDAY IN THE TUPLE TO A  DATETIME OBJECT
-
-    # for value in person_data.values():
-    #     try:
-    #         format = "%m/%d/%Y"
-    #         req_format = datetime.strptime(value[1], format).date()
-    #         print(req_format)
-    #     except:
-    #         pass
     
-# return dictionary  
-#UNCOMMENT
+    # return dictionary  
     for key, value in person_data.items():
-        print(key, ":", value)
+        print(key, ":", value) # return not print
         
         
 
 # def displayPerson(id, personData):
 #     pass
+
 
 # def main(url):
 #     print(f"Running main with URL = {url}...")
