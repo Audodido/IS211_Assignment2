@@ -19,20 +19,27 @@ def processData(file_content):
     person_data = {}                
     split_list = file_content.splitlines()
     format = "%d/%m/%Y" 
+    index = 1 
 
     for i in split_list:
         a = i.decode("utf-8") #decodes each entry
         b = a.split(",") # splits each entry into it's own list
-        # print(b)
         try:
             date_req_format = datetime.strptime(b[2], format).date() #formats datetime obj
             person_data[b[0]] = (b[1], date_req_format)
-            # print(b[0], b[1], date_req_format)
-        except:
-            # pass
-            print("bad format", b[0]) ##change to logging + error message
+        except ValueError:
+            LOG_FORMAT = "%(asctime)s %(levelname)s %(message)s"
+            logging.basicConfig(filename = "assignment2.txt",
+                    level = logging.DEBUG,
+                    format = LOG_FORMAT,
+                    filemode = "w")
+            logger = logging.getLogger()
+            logging.error("Error processing line #{} for ID #{}".format(index, b[0]))
 
-    
+        index += 1
+
+
+
     # return dictionary  
     for key, value in person_data.items():
         print(key, ":", value) # return not print
