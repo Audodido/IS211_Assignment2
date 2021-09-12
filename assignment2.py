@@ -4,7 +4,6 @@ import logging
 from datetime import datetime
 
 
-
 def downloadData(url):
     """Downloads the data"""
 
@@ -18,7 +17,7 @@ def downloadData(url):
 
 
 def processData(file_content):
-
+    """Decodes and breaks CSV data up then stores it in a dictionary """
 
     person_data = {}                
     split_list = file_content.splitlines()
@@ -36,13 +35,12 @@ def processData(file_content):
 
         index += 1
 
-    
     return person_data #returns dictionary
 
         
-        
 def displayPerson(id, personData):
     """Gets name and bday of a user"""
+    
     try:
         name, date = personData[str(id)]
         print("Person #{} is {} with a birthday of {}".format(id, name, date)) 
@@ -60,7 +58,6 @@ def main(url):
     csvData = downloadData(url)
     personData = processData(csvData)
 
-
     # prompts user for ID input until they give a value of <= 0
     val = True
 
@@ -70,9 +67,6 @@ def main(url):
             exit()
         else:
             displayPerson(val, personData)
-
-
-
 
 if __name__ == "__main__":
     """Main entry point"""
